@@ -1,0 +1,171 @@
+#include "simple_shell.h"
+/**
+ * _execve - execute all the commands
+ * @prompt: the command to execute
+ * @fileName: executable file name
+ * @env: enviroment variables
+ *
+ * Return: is a void
+ */
+void _execve(char *prompt, char *fileName, char **env)
+{
+	char *arguments, **argum, *path_val, *pathEnv;
+	int cnt = 0, sizeArgum;
+	struct stat stat_var;
+
+	sizeArgum = countSpace(prompt);
+	argum = malloc(sizeof(char *) * ++sizeArgum);
+
+	if (argum == NULL)
+		perror(fileName);
+
+	arguments = strtok(prompt, " \t\n\r");
+
+	while (arguments != NULL)
+	{
+		argum[cnt++] = arguments;
+		arguments = strtok(NULL, " \t\n\r");
+	}
+	argum[cnt] = NULL;
+	checkHelp(argum[0],  argum[1]);
+	checkCd(argum[0], argum[1]);
+	if (stat(argum[0], &stat_var) == 0)
+	{
+		if (execve(argum[0], argum, env) == -1)
+			perror(fileName);
+	}
+	else
+	{
+		path_val = get_env_value("PATH", env);
+		pathEnv = env_split(path_val, argum[0], fileName);
+
+		if (execve(pathEnv, argum, env) == -1)
+			perror(fileName);
+	}
+
+	free(argum);
+
+	exit(0);
+}
+/**
+ * get_env_value - get the enviroment var value
+ * @nameVar: name var
+ * @env: enviroment variables
+ *
+ * Return: pointer to the value
+ */
+char *get_env_value(char *nameVar, char **env)
+{
+	int cnt = 0;
+	char *arguments;
+
+	arguments = strtok(env[cnt], "=");
+
+	while (env[cnt])
+	{
+		if (_strcmp(arguments, nameVar) == 0)
+		{
+			arguments = strtok(NULL, "\n");
+			return (arguments);
+		}
+
+		cnt++;
+		arguments = strtok(env[cnt], "=");
+	}
+
+	return (NULL);
+}
+/**
+ * env_split - split the value of the enviroment var
+ * @path_value: pointer to the value
+ * @command: command to concat
+ * @fileName: executable file name
+ *
+ * Return: the complete path
+ */
+char *env_split(char *path_value, char *command, char *fileName)
+{
+	int lenCommand = 0, lenPath = 0, _mallocsize;
+	char *valuePath = strtok(path_value, ":"), *pathDir;
+	struct stat stat_var;
+
+	lenCommand = lengthArray(command);
+	lenPath = lengthArray(valuePath);
+	_mallocsize = lenCommand + lenPath + 1;
+
+	while (valuePath != NULL)
+	{
+		pathDir = malloc(sizeof(char) * (_mallocsize));
+		if (pathDir == NULL)
+			perror(fileName);
+
+		strcat(pathDir, valuePath);
+		strcat(pathDir, "/");
+		strcat(pathDir, command);
+		*(pathDir + _mallocsize) = '\0';
+
+		if (stat(pathDir, &stat_var) == 0)
+			return (pathDir);
+
+		free(pathDir);
+
+		valuePath = strtok(NULL, ":");
+	}
+
+	return (NULL);
+}
+
+/**
+ * checkHelp - check if is a help command
+ * @command: command to validate
+ * @arg: command's arguments
+ *
+ */
+void checkHelp(char *command, char *arg)
+{
+	if (_strcmp(command, "help") == 0)
+	{
+		if (_strcmp("cd", arg) == 0)
+		{
+			read_textfile("help_cd", 1576);
+		}
+		else if (_strcmp(arg, "exit") == 0)
+		{
+			read_textfile("help_exit", 152);
+		}
+		else if (_strcmp(arg, "alias") == 0)
+		{
+			read_textfile("help_alias", 567);
+		}
+		else if ((_strcmp(arg, "help") == 0))
+		{
+			read_textfile("help_help", 643);
+		}
+		exit(0);
+	}
+}
+
+/**
+ *checkCd - chek if is a cd command
+ *@command: command to validate
+ *@arg: command's argument
+ *
+ */
+void checkCd(char *command, char *arg)
+{
+	char tst[100];
+
+	if (_strcmp(command, "cd") == 0)
+	{
+		if (arg != NULL)
+		{
+			printf("%s\n", getcwd(tst, 100));
+			if (chdir(arg) != 0)
+			{
+				perror(command);
+			}
+			printf("%s\n", getcwd(tst, 100));
+		}
+		exit(0);
+	}
+}
