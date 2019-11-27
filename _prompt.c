@@ -14,7 +14,10 @@ char *_prompt(int status_iss, char *fileName)
 
 	do {
 		if (status_iss)
+		{
 			_putchar('$');
+			_putchar(' ');
+		}
 		len = getline(&get_promtp, &size_buffer, stdin);
 		exitValidation(get_promtp);
 

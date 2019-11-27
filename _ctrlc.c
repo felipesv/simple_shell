@@ -20,4 +20,5 @@ void newPrompt(int _signal)
 	(void)_signal;
 	_putchar('\n');
 	_putchar('$');
+	_putchar(' ');
 }
