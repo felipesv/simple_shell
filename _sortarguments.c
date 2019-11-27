@@ -9,14 +9,17 @@ char **_sortArguments(char *prompt, char *fileName)
 	sizeArgum = countSpace(prompt);
 	argum = malloc(sizeof(char *) * ++sizeArgum);
 	if (argum == NULL)
-		return (NULL);
+		perror("Error");
 
 	arguments = strtok(prompt, " \t\n\r");
 	while (arguments != NULL)
 	{
-		argum[cnt++] = arguments;
+		argum[cnt] = malloc(sizeof(char) * (lengthArray(arguments) + 1));
+		_strcpy(argum[cnt], arguments);
 		arguments = strtok(NULL, " \t\n\r");
+		cnt++;
 	}
+/*	free(arguments);*/
 	argum[cnt] = NULL;
 
 	return (argum);

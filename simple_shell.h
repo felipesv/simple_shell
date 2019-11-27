@@ -25,7 +25,8 @@ void _error(int status, char **arguments, char *fileName);
 char *get_env_value(char *nameVar, char **env);
 char **copyEnv(char **env);
 int countSpace(char *prompt);
-void frees(char *prompt, char **arguments);
+void freeDoublePointer(char **pointer);
+void freePointer(char *pointer);
 
 int _putchar(char c);
 char *_strcat(char *dest, char *src);

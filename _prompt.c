@@ -2,8 +2,8 @@
 
 char *_prompt(int isattyStatus)
 {
-	char *get_prompt;
-	int len;
+	char *get_prompt = NULL;
+	int len = 0;
 	size_t size_buffer = 0;
 
 	if (isattyStatus)

@@ -8,7 +8,7 @@
  */
 char *_strcat(char *dest, char *src)
 {
-	int lengthDest, lengthSrc, iDest, jSrc;
+	int lengthDest = 0, lengthSrc = 0, iDest = 0, jSrc = 0;
 
 	lengthDest = lengthArray(dest);
 	lengthSrc = lengthArray(src);

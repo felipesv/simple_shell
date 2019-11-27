@@ -14,7 +14,7 @@ int lengthArray(char *array)
 {
 	int length = 0;
 
-	while (array[length] != '\0')
+	while (array != NULL && array[length] != '\0')
 	{
 		length++;
 	}

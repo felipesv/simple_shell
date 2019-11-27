@@ -3,9 +3,9 @@
 char *get_env_value(char *nameVar, char **env)
 {
 	int cnt = 0;
-	char *arguments, **cpyEnv = copyEnv(env);
+	char *arguments;
 
-	arguments = strtok(cpyEnv[cnt], "=");
+	arguments = strtok(env[cnt], "=");
 
 	while (env[cnt])
 	{
@@ -16,7 +16,7 @@ char *get_env_value(char *nameVar, char **env)
 		}
 
 		cnt++;
-		arguments = strtok(cpyEnv[cnt], "=");
+		arguments = strtok(env[cnt], "=");
 	}
 
 	return (NULL);

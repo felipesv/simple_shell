@@ -1,16 +1,26 @@
 #include "simple_shell.h"
 
-void frees(char *prompt, char **arguments)
+void freeDoublePointer(char **pointer)
 {
+	int cnt = 0;
 
-	(void)arguments;
-
-	free(prompt);
-
-/*	while(arguments[cnt] != NULL)
+	if (pointer != NULL)
 	{
-		free(arguments[cnt]);
+		while (pointer[cnt] != NULL)
+		{
+			free(pointer[cnt]);
+			cnt++;
+		}
+		free(pointer[cnt]);
+		free(pointer);
 	}
+}
 
-	free(arguments);*/
+
+void freePointer(char *pointer)
+{
+	if (pointer != NULL)
+	{
+		free(pointer);
+	}
 }

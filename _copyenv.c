@@ -8,8 +8,8 @@
 char **copyEnv(char **env)
 {
 	int cntArg = countArguments(env);
-	int cnt = 0, cntDinamyc;
-	char **cpyEnv = malloc(sizeof(char *) * cntArg);
+	int cnt = 0, cntDinamyc = 0;
+	char **cpyEnv = malloc(sizeof(char *) * (cntArg + 1));
 
 	if (cpyEnv == NULL)
 		perror("Error");
@@ -17,7 +17,7 @@ char **copyEnv(char **env)
 	while (env[cnt] != NULL)
 	{
 		cntDinamyc = lengthArray(env[cnt]);
-		cpyEnv[cnt] = malloc(sizeof(char) * cntDinamyc);
+		cpyEnv[cnt] = malloc(sizeof(char) * (cntDinamyc + 1));
 
 		if (cpyEnv[cnt] == NULL)
 		{
@@ -34,6 +34,8 @@ char **copyEnv(char **env)
 		_strcpy(cpyEnv[cnt], env[cnt]);
 		cnt++;
 	}
+
+	cpyEnv[cnt] = NULL;
 
 	return (cpyEnv);
 }

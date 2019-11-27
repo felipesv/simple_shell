@@ -48,9 +48,6 @@ int main (int argc, char **argv, char **env)
 		freeDoublePointer(arguments);
 		freePointer(valuePrompt);
 		freePointer(valuePath);
-		arguments = NULL;
-		valuePrompt = NULL;
-		valuePath = NULL;
 
        } while (1);
 

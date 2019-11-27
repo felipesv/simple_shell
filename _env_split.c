@@ -6,16 +6,17 @@ char *env_split(char *path_value, char *command, char *fileName)
 	char *valuePath = strtok(path_value, ":"), *pathDir;
 	struct stat stat_var;
 
-	lenCommand = lengthArray(command);
-	lenPath = lengthArray(valuePath);
-	_mallocsize = lenCommand + lenPath + 1;
+       	lenCommand = lengthArray(command);
 
 	while (valuePath != NULL)
 	{
-		pathDir = malloc(sizeof(char) * (_mallocsize));
+		lenPath = lengthArray(valuePath);
+		_mallocsize = lenCommand + lenPath + 1;
+
+		pathDir = malloc(sizeof(char) * (_mallocsize + 1));
 		if (pathDir == NULL)
 			perror(fileName);
-
+		pathDir[0] = '\0';
 		_strcat(pathDir, valuePath);
 		_strcat(pathDir, "/");
 		_strcat(pathDir, command);
@@ -25,6 +26,7 @@ char *env_split(char *path_value, char *command, char *fileName)
 			return (pathDir);
 
 		free(pathDir);
+		pathDir = NULL;
 
 		valuePath = strtok(NULL, ":");
 	}
