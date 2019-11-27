@@ -14,37 +14,22 @@
 #include<sys/wait.h>
 #include <signal.h>
 
-
-/* MACROS */
-#define MSJ_SIZE 1
-
-/* FUNCTIONS */
-int _putchar(char c);
-char *_prompt(int status_iss, char *fileName);
-void delete_newline(char **prompt);
-void _execve(char *prompt, char *fileName, char **env);
-int _strcmp(char *s1, char *s2);
-char *_strcpy(char *dest, char *src);
-int countSpace(char *prompt);
-char *get_env_value(char *nameVar, char **env);
-int lengthArray(char *array);
-char *_strcat(char *dest, char *src);
-char *get_env_value(char *nameVar, char **env);
-char *env_split(char *path_value, char *command, char *fileName);
-void exitValidation(char *prompt);
-void ctrlcValidate(void);
-void newPrompt(int _signal);
-char **copyEnv(char **env);
-void freeDoubleArray(char **arg);
-int _print_numbers_recursion(int number);
-
-ssize_t read_textfile(const char *filename, size_t letters);
-void checkHelp(char *command, char *arg);
-void checkCd(char *command, char *arg);
+char *_prompt(int isattyStatus);
+char *buildPath(char **argum, char *fileName, char **env);
 char **_sortArguments(char *prompt, char *fileName);
-void _execve2(char *prompt, char *fileName);
-void showError(char **arg, char *fileName);
+char *env_split(char *path_value, char *command, char *fileName);
+int _print_numbers_recursion(int number);
 int countArguments(char **arg);
-char *buildPath(char **argum, char *nameFile, char **env);
+int lengthArray(char *array);
+void _error(int status, char **arguments, char *fileName);
+char *get_env_value(char *nameVar, char **env);
+char **copyEnv(char **env);
+int countSpace(char *prompt);
+void frees(char *prompt, char **arguments);
+
+int _putchar(char c);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
 
 #endif /* SIMPLE_SHELL_H */

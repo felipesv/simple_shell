@@ -1,38 +1,51 @@
 #include "simple_shell.h"
-/**
- * main - main function for the shell
- * @argc: number of arguments
- * @argv: arguments
- * @env: enviroments variables
- *
- * Return: 0 success.
- */
-int main(int argc, char *argv[], char *env[])
+
+int main (int argc, char **argv, char **env)
 {
-	char *prompt;
+	char *valuePrompt, **arguments, *valuePath;
+	int valueAccess, *status_fork = NULL;
 	pid_t child_process;
-	int *status_fork = NULL;
 	(void)argc;
 
-	ctrlcValidate();
+       do
+       {
+		valuePrompt = _prompt(isatty(STDIN_FILENO));
+		if (valuePrompt == NULL)
+			return (0);
+		arguments = _sortArguments(valuePrompt, argv[0]);
+		valuePath = buildPath(arguments, argv[0], env);
 
-	do {
-		prompt = _prompt(isatty(STDIN_FILENO), argv[0]);
-		child_process = fork();
-
-		if (child_process == 0)
-			_execve(prompt, argv[0], env);
-
-		if (child_process > 0)
+		if (valuePath == NULL)
+			_error(127, arguments, argv[0]);
+		else
 		{
-			wait(status_fork);
-			_execve2(prompt, argv[0]);
-
-			if (isatty(STDIN_FILENO) == 0)
-				return (0);
+			valueAccess = access(valuePath, X_OK);
+			if (valueAccess != 0)
+				_error(126, arguments, argv[0]);
+			else
+			{
+				child_process = fork();
+				if (child_process < 0)
+				{
+					perror("Error");
+					exit(1);
+				}
+				if (child_process == 0)
+				{
+					if (execve(valuePath, arguments, env) == -1)
+					{
+						perror("Error");
+						exit(127);
+					}
+				}
+				if (child_process > 0)
+					wait(status_fork);
+			}
 		}
 
-	} while (1);
+		frees(valuePrompt, arguments);
 
-	return (0);
+       } while (1);
+
+       return (*status_fork);
 }

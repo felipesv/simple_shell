@@ -37,23 +37,3 @@ char **copyEnv(char **env)
 
 	return (cpyEnv);
 }
-/**
- * freeDoubleArray - free a **pointer
- * @arg: pointer to free
- *
- * Return: is a void
- */
-void freeDoubleArray(char **arg)
-{
-	int cnt = countArguments(arg);
-
-	cnt--;
-
-	while (cnt >= 0)
-	{
-		free(arg[cnt]);
-		cnt--;
-	}
-
-	free(arg);
-}

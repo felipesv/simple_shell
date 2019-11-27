@@ -29,20 +29,3 @@ char *_strcat(char *dest, char *src)
 
 	return (dest);
 }
-/**
- * lengthArray - length array
- * @array: array
- *
- * Return: return string cocatenated
- */
-int lengthArray(char *array)
-{
-	int length = 0;
-
-	while (array[length] != '\0')
-	{
-		length++;
-	}
-
-	return (length);
-}

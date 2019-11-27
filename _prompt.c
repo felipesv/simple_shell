@@ -1,68 +1,24 @@
 #include "simple_shell.h"
-/**
- * _prompt - get the input value
- * @status_iss: issaty value
- * @fileName: executable file name
- *
- * Return: pointer to the prompt value
- */
-char *_prompt(int status_iss, char *fileName)
+
+char *_prompt(int isattyStatus)
 {
-	char *get_promtp;
+	char *get_prompt;
 	int len;
 	size_t size_buffer = 0;
 
-	do {
-		if (status_iss)
-		{
-			_putchar('$');
-			_putchar(' ');
-		}
-		len = getline(&get_promtp, &size_buffer, stdin);
-		exitValidation(get_promtp);
+	if (isattyStatus)
+		write(STDOUT_FILENO, "$ ", 2);
 
-		if (len == EOF)
-		{
-			_putchar('\n');
-			exit(0);
-		}
-
-		if (len == -1)
-			perror(fileName);
-
-	} while (len == 1 || len == 0);
-
-	return (get_promtp);
-}
-/**
- * countSpace - count the arguments
- * @prompt: prompt value
- *
- * Return: spaces counted
- */
-int countSpace(char *prompt)
-{
-	int cnt = 0, size = 1;
-
-	while (*(prompt + cnt))
+	len = getline(&get_prompt, &size_buffer, stdin);
+	if (len == -1)
 	{
-		if (*(prompt + cnt) == 32)
-			size++;
-		cnt++;
+		free(get_prompt);
+		if(isattyStatus)
+			_putchar('\n');
+		return (NULL);
 	}
+	*(get_prompt + (--len)) = '\0';
 
-	return (size);
-}
-/**
- * exitValidation - check if the command is exit
- * @prompt: prompt value
- *
- * Return: is a void
- */
-void exitValidation(char *prompt)
-{
-	char *_exit = "exit\n";
+	return (get_prompt);
 
-	if (_strcmp(_exit, prompt) == 0)
-		exit(0);
 }
