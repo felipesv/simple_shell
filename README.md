@@ -9,17 +9,23 @@ source [2019]: [https://www.tutorialspoint.com/unix/unix-what-is-shell.htm](http
 
 # Files
 
- - _ctrlc.c 
- - help_cd
- - _prompt.c
- - _read_textfile.c
- - _strcat.c
- - _strcpy.c
- - _execve.c
- - _main.c
- - _putchar.c 
- - simple_shell.h
+ - _countspaces.c
+ - _get_env_value.c
+ - _print_numbers_recursion.c
  - _strcmp.c
+ - _buildpath.c
+ - _env_split.c
+ - _process.c
+ - _strcpy.c
+ - _copyenv.c
+ - _error.c
+ - _main.c
+ - _prompt.c
+ - _sortarguments.c
+ - _counters.c
+ - _free.c
+ - _putchar.c
+ - _strcat.c
 
 ## Requirements
 
@@ -93,6 +99,9 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 - hsh main.c shell.c test_ls_2
 - hsh main.c shell.c test_ls_2
 - $
+ 
+## How it works
+<p align="center"><img src="https://drive.google.com/open?id=1No7Q4Sjj2kuuZW-TJVTuNYdYEvIOsXCJ" alt="diagrama"></a></p>
 
 ## Authors
 
