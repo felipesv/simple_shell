@@ -101,7 +101,7 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 - $
  
 ## How it works
-<p align="center"><img src="https://drive.google.com/open?id=1No7Q4Sjj2kuuZW-TJVTuNYdYEvIOsXCJ" alt="diagrama"></a></p>
+<p align="center"><img src="https://github.com/felipesv/simple_shell/blob/master/Diagram.png" alt="diagrama"></a></p>
 
 ## Authors
 
