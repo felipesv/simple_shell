@@ -16,7 +16,13 @@ int main(int argc, char **argv, char **env)
 	do {
 		valuePrompt = _prompt(isatty(STDIN_FILENO));
 		if (valuePrompt == NULL)
+		{
+			freeDoublePointer(arguments);
+			freePointer(valuePrompt);
+			freePointer(valuePath);
 			return (0);
+		}
+
 		arguments = _sortArguments(valuePrompt, argv[0]);
 		valuePath = buildPath(arguments, argv[0], env);
 		if (valuePath == NULL)
@@ -25,7 +31,6 @@ int main(int argc, char **argv, char **env)
 		{
 			_process(status_fork, valuePath, arguments, env);
 		}
-
 		freeDoublePointer(arguments);
 		freePointer(valuePrompt);
 		freePointer(valuePath);
