@@ -1,5 +1,10 @@
 #include "simple_shell.h"
-
+/**
+ * _prompt - get the prompt
+ * @isattyStatus: issaty status
+ *
+ * Return: prompt
+ */
 char *_prompt(int isattyStatus)
 {
 	char *get_prompt = NULL;
@@ -13,7 +18,7 @@ char *_prompt(int isattyStatus)
 	if (len == -1)
 	{
 		free(get_prompt);
-		if(isattyStatus)
+		if (isattyStatus)
 			_putchar('\n');
 		return (NULL);
 	}

@@ -1,5 +1,12 @@
 #include "simple_shell.h"
-
+/**
+ * _error - error message
+ * @status: status fail
+ * @arguments: arguments to show
+ * @fileName: executable file name
+ *
+ * Return: is a void
+ */
 void _error(int status, char **arguments, char *fileName)
 {
 	int cntArg = countArguments(arguments);

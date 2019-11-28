@@ -5,14 +5,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
-#include <stdarg.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include<sys/wait.h>
-#include <signal.h>
+#include <sys/wait.h>
 
 char *_prompt(int isattyStatus);
 char *buildPath(char **argum, char *fileName, char **env);
@@ -27,6 +24,7 @@ char **copyEnv(char **env);
 int countSpace(char *prompt);
 void freeDoublePointer(char **pointer);
 void freePointer(char *pointer);
+void _process(int *status_fork, char *valuePath, char **arguments, char **env);
 
 int _putchar(char c);
 char *_strcat(char *dest, char *src);

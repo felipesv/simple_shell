@@ -1,5 +1,10 @@
 #include "simple_shell.h"
-
+/**
+ * _print_numbers_recursion - print a number
+ * @number: number to print
+ *
+ * Return: count
+ */
 int _print_numbers_recursion(int number)
 {
 	int new_number = number / 10;

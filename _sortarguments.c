@@ -1,5 +1,11 @@
 #include "simple_shell.h"
-
+/**
+ * _sortArguments - execute all the commands
+ * @prompt: prompt
+ * @fileName: executable file name
+ *
+ * Return: pointer
+ */
 char **_sortArguments(char *prompt, char *fileName)
 {
 	char *arguments, **argum;

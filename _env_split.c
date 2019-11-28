@@ -1,12 +1,19 @@
 #include "simple_shell.h"
-
+/**
+ * env_split - split the prompt value
+ * @path_value: path value
+ * @command: command to execute
+ * @fileName: executable file name
+ *
+ * Return: return pointer
+ */
 char *env_split(char *path_value, char *command, char *fileName)
 {
 	int lenCommand = 0, lenPath = 0, _mallocsize;
 	char *valuePath = strtok(path_value, ":"), *pathDir;
 	struct stat stat_var;
 
-       	lenCommand = lengthArray(command);
+	lenCommand = lengthArray(command);
 
 	while (valuePath != NULL)
 	{
