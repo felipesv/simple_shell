@@ -17,7 +17,15 @@ char *buildPath(char **argum, char *fileName, char **env)
 		if ((argum[0][0] == '/') ||
 		     (argum[0][0] == '.' && argum[0][1] == '/') ||
 		     (argum[0][0] == '.' && argum[0][1] == '.'))
-			return (argum[0]);
+		{
+			pathEnv = malloc(sizeof(char) * lengthArray(argum[0]) + 1);
+			if (pathEnv == NULL)
+				perror("Error");
+			_strcpy(pathEnv, argum[0]);
+			pathEnv[lengthArray(argum[0])] = '\0';
+			freeDoublePointer(cpyEnv);
+			return (pathEnv);
+		}
 	}
 
 	path_val = get_env_value("PATH", cpyEnv);

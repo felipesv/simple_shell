@@ -17,9 +17,9 @@ int main(int argc, char **argv, char **env)
 		valuePrompt = _prompt(isatty(STDIN_FILENO));
 		if (valuePrompt == NULL)
 		{
-			freeDoublePointer(arguments);
-			freePointer(valuePrompt);
-			freePointer(valuePath);
+					freeDoublePointer(arguments);
+		freePointer(valuePrompt);
+		freePointer(valuePath);
 			return (0);
 		}
 
