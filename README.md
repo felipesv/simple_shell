@@ -99,7 +99,13 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 - hsh main.c shell.c test_ls_2
 - hsh main.c shell.c test_ls_2
 - $
- 
+## EXAMPLE
+- 1. Generate the executable using this command `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh\`
+- 2. Then write and execute this command line `./hsh`
+- 3. Now you can to interact with the shell
+- 4. Write ls -la (you should see something like that: `$ ls -la`)
+- 5. and write ls -la (you should see something like that: `$ ls -la`)
+
 ## How it works
 <p align="center"><img src="https://github.com/felipesv/simple_shell/blob/master/Diagram.png" alt="diagrama"></a></p>
 
