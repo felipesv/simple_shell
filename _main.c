@@ -9,10 +9,11 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	char *valuePrompt, **arguments, *valuePath;
+	char *valuePrompt = NULL, **arguments = NULL, *valuePath = NULL;
 	int *status_fork = NULL;
 	(void)argc;
 
+	ctrlcValidate();
 	do {
 		valuePrompt = _prompt(isatty(STDIN_FILENO));
 		if (valuePrompt == NULL)

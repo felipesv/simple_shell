@@ -25,6 +25,9 @@ int countSpace(char *prompt);
 void freeDoublePointer(char **pointer);
 void freePointer(char *pointer);
 void _process(int *status_fork, char *valuePath, char **arguments, char **env);
+void ctrlcValidate(void);
+void newPrompt(int _signal);
+
 
 int _putchar(char c);
 char *_strcat(char *dest, char *src);
