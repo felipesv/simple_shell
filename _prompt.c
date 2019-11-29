@@ -16,6 +16,7 @@ char *_prompt(int isattyStatus)
 			write(STDOUT_FILENO, "$ ", 2);
 
 		len = getline(&get_prompt, &size_buffer, stdin);
+		exitValidation(get_prompt);
 		if (len == -1)
 		{
 			free(get_prompt);

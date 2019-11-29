@@ -27,6 +27,7 @@ void freePointer(char *pointer);
 void _process(int *status_fork, char *valuePath, char **arguments, char **env);
 void ctrlcValidate(void);
 void newPrompt(int _signal);
+void exitValidation(char *prompt);
 
 
 int _putchar(char c);
